@@ -976,6 +976,32 @@
 
       let isOpen = false;
 
+      // ✅ SCROLL SUAVE REAL (DESLIZAMIENTO)
+      function smoothScrollTo(targetY, duration = 1400) {
+        const startY = window.scrollY;
+        const diff = targetY - startY;
+        let startTime = null;
+
+        function easeInOutCubic(t) {
+          return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          const elapsed = timestamp - startTime;
+          const t = Math.min(elapsed / duration, 1);
+          const eased = easeInOutCubic(t);
+
+          window.scrollTo(0, startY + diff * eased);
+
+          if (elapsed < duration) {
+            requestAnimationFrame(step);
+          }
+        }
+
+        requestAnimationFrame(step);
+      }
+
       function spawnHeart(times = 6) {
         const emojis = ["💗", "💖", "💘", "💕", "💞"];
         for (let i = 0; i < times; i++) {
@@ -1033,6 +1059,12 @@
 
         envelope.classList.add("open");
         letter.classList.add("open");
+
+        // ✅ SCROLL SUAVE A LA CARTA (DESLIZAMIENTO REAL)
+        setTimeout(() => {
+          const y = letter.getBoundingClientRect().top + window.scrollY - 20;
+          smoothScrollTo(y, 1600);
+        }, 250);
 
         btnOpen.style.display = "none";
         btnClose.style.display = "inline-block";
