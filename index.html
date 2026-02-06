@@ -55,6 +55,7 @@
           linear-gradient(160deg, var(--bg1), var(--bg2));
       }
 
+      /* ⭐ Stars */
       .stars {
         position: fixed;
         inset: 0;
@@ -84,11 +85,12 @@
         }
       }
 
+      /* Layout */
       .wrap {
         min-height: 100vh;
         display: grid;
         place-items: center;
-        padding: 28px 16px 52px;
+        padding: 32px 16px 64px;
         position: relative;
         z-index: 1;
       }
@@ -101,14 +103,15 @@
 
       .title {
         text-align: center;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
 
       .title h1 {
         margin: 0 0 8px;
-        font-size: clamp(22px, 3.8vw, 42px);
-        letter-spacing: 0.4px;
+        font-size: clamp(22px, 3.8vw, 44px);
+        letter-spacing: 0.2px;
         font-weight: 900;
+        line-height: 1.05;
       }
 
       .title p {
@@ -117,6 +120,7 @@
         font-size: clamp(14px, 2vw, 16px);
       }
 
+      /* Top grid: Desktop = envelope + player */
       .top {
         width: 100%;
         display: grid;
@@ -125,9 +129,19 @@
         align-items: stretch;
       }
 
+      /* Responsive: player arriba, envelope abajo */
       @media (max-width: 1020px) {
         .top {
           grid-template-columns: 1fr;
+          grid-template-areas:
+            "player"
+            "envelope";
+        }
+        .envelope-zone {
+          grid-area: envelope;
+        }
+        .player {
+          grid-area: player;
         }
       }
 
@@ -137,11 +151,12 @@
         padding: 6px;
       }
 
+      /* Envelope */
       .envelope {
         width: min(560px, 95vw);
         aspect-ratio: 16/10;
         position: relative;
-        border-radius: 24px;
+        border-radius: 26px;
         transform: translateY(0);
         transition:
           transform 0.35s ease,
@@ -149,6 +164,7 @@
         filter: drop-shadow(0 35px 60px rgba(0, 0, 0, 0.5));
         user-select: none;
         cursor: pointer;
+        will-change: transform;
       }
 
       .envelope:hover {
@@ -159,15 +175,15 @@
       .env-body {
         position: absolute;
         inset: 0;
-        border-radius: 24px;
+        border-radius: 26px;
         background: linear-gradient(
           145deg,
-          rgba(255, 255, 255, 0.09),
+          rgba(255, 255, 255, 0.1),
           rgba(255, 255, 255, 0.03)
         );
         border: 1px solid rgba(255, 255, 255, 0.16);
         overflow: hidden;
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
       }
 
       .env-bottom {
@@ -249,8 +265,8 @@
         left: 50%;
         top: 56%;
         transform: translate(-50%, -50%);
-        width: 68px;
-        height: 68px;
+        width: 70px;
+        height: 70px;
         border-radius: 999px;
         background:
           radial-gradient(
@@ -296,14 +312,14 @@
 
       .tag {
         padding: 10px 12px;
-        border-radius: 16px;
-        background: rgba(0, 0, 0, 0.26);
+        border-radius: 18px;
+        background: rgba(0, 0, 0, 0.28);
         border: 1px solid rgba(255, 255, 255, 0.12);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
         display: flex;
         align-items: center;
         gap: 10px;
-        min-width: 140px;
+        min-width: 160px;
       }
 
       .dot {
@@ -314,6 +330,7 @@
         box-shadow: 0 0 0 7px rgba(255, 77, 125, 0.16);
       }
 
+      /* Player */
       .player {
         width: 100%;
         max-width: 420px;
@@ -321,7 +338,7 @@
         overflow: hidden;
         border: 1px solid rgba(255, 255, 255, 0.16);
         background: rgba(0, 0, 0, 0.26);
-        backdrop-filter: blur(14px);
+        backdrop-filter: blur(16px);
         box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5);
         align-self: stretch;
         position: relative;
@@ -353,8 +370,8 @@
       }
 
       .cover {
-        width: 82px;
-        height: 82px;
+        width: 86px;
+        height: 86px;
         border-radius: 18px;
         overflow: hidden;
         flex: 0 0 auto;
@@ -476,6 +493,57 @@
         accent-color: var(--rose);
       }
 
+      /* Buttons */
+      .controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 6px;
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        padding: 12px 18px;
+        border-radius: 18px;
+        font-weight: 900;
+        letter-spacing: 0.2px;
+        transition:
+          transform 0.12s ease,
+          opacity 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      button:hover {
+        filter: brightness(1.05);
+      }
+
+      button:active {
+        transform: translateY(1px) scale(0.99);
+      }
+
+      .btn-open {
+        background: linear-gradient(135deg, var(--rose), var(--rose2));
+        color: white;
+      }
+
+      .btn-close {
+        background: rgba(0, 0, 0, 0.75);
+        color: white;
+        box-shadow: none;
+      }
+
+      .hint {
+        opacity: 0.82;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      /* Letter */
       .letter {
         width: min(980px, 96vw);
         background:
@@ -496,7 +564,8 @@
         border: 1px solid rgba(0, 0, 0, 0.06);
         overflow: hidden;
 
-        transform: translateY(22px) scale(0.98);
+        /* Mejor: la carta se abre hacia abajo bien */
+        transform: translateY(14px) scale(0.985);
         opacity: 0;
         pointer-events: none;
         transition:
@@ -542,9 +611,9 @@
       }
 
       .letter-body {
-        padding: 28px;
+        padding: 30px;
         font-size: 17px;
-        line-height: 1.8;
+        line-height: 1.85;
       }
 
       .letter-body p {
@@ -567,55 +636,7 @@
         letter-spacing: 0.4px;
       }
 
-      .controls {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 4px;
-      }
-
-      button {
-        border: none;
-        cursor: pointer;
-        padding: 12px 18px;
-        border-radius: 18px;
-        font-weight: 900;
-        letter-spacing: 0.2px;
-        transition:
-          transform 0.12s ease,
-          opacity 0.2s ease,
-          box-shadow 0.2s ease,
-          filter 0.2s ease;
-        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-      }
-
-      button:hover {
-        filter: brightness(1.05);
-      }
-
-      button:active {
-        transform: translateY(1px) scale(0.99);
-      }
-
-      .btn-open {
-        background: linear-gradient(135deg, var(--rose), var(--rose2));
-        color: white;
-      }
-
-      .btn-close {
-        background: rgba(0, 0, 0, 0.75);
-        color: white;
-        box-shadow: none;
-      }
-
-      .hint {
-        opacity: 0.82;
-        font-size: 14px;
-        text-align: center;
-        margin-top: 10px;
-      }
-
+      /* Open states */
       .envelope.open .flap {
         transform: rotateX(170deg);
       }
@@ -625,6 +646,7 @@
         opacity: 0.35;
       }
 
+      /* Floating hearts */
       .heart {
         position: fixed;
         left: 50%;
@@ -653,28 +675,43 @@
         }
       }
 
+      /* Mobile */
       @media (max-width: 520px) {
+        .wrap {
+          padding: 26px 14px 56px;
+        }
+
         .letter-body {
           font-size: 16px;
           padding: 20px;
         }
+
         .letter-head {
           padding: 18px 20px;
         }
+
         .tag {
           min-width: auto;
           padding: 9px 10px;
           border-radius: 14px;
         }
+
         .env-label {
           font-size: 13px;
         }
+
         .cover {
           width: 74px;
           height: 74px;
         }
+
         .player-inner {
           padding: 16px;
+        }
+
+        /* Mejora para que se vea más centrado en móvil */
+        .player {
+          max-width: 520px;
         }
       }
     </style>
