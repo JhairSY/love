@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For You💗</title>
+
+    <style>
+      :root {
+        --bg1: #070611;
+        --bg2: #120b1f;
+        --paper: #fff7ee;
+        --ink: #2a1d22;
+        --rose: #ff4d7d;
+        --rose2: #ff7aa2;
+        --shadow: 0 22px 80px rgba(0, 0, 0, 0.55);
+        --glass: rgba(255, 255, 255, 0.08);
+        --glass2: rgba(0, 0, 0, 0.25);
+        --border: rgba(255, 255, 255, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Arial,
+          sans-serif;
+        color: #fff;
+        overflow-x: hidden;
+
+        background:
+          radial-gradient(
+            1200px 800px at 12% 10%,
+            rgba(255, 77, 125, 0.22),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px 600px at 85% 25%,
+            rgba(255, 122, 162, 0.16),
+            transparent 55%
+          ),
+          radial-gradient(
+            1000px 800px at 50% 100%,
+            rgba(255, 77, 125, 0.1),
+            transparent 60%
+          ),
+          linear-gradient(160deg, var(--bg1), var(--bg2));
+      }
+
+      .stars {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.45;
+        background-image:
+          radial-gradient(1px 1px at 10% 20%, #fff, transparent),
+          radial-gradient(1px 1px at 30% 80%, #fff, transparent),
+          radial-gradient(1px 1px at 70% 40%, #fff, transparent),
+          radial-gradient(1px 1px at 90% 70%, #fff, transparent),
+          radial-gradient(1px 1px at 55% 15%, #fff, transparent),
+          radial-gradient(1px 1px at 15% 65%, #fff, transparent),
+          radial-gradient(1px 1px at 80% 10%, #fff, transparent),
+          radial-gradient(1px 1px at 45% 55%, #fff, transparent);
+        background-repeat: no-repeat;
+        filter: blur(0.2px);
+        animation: twinkle 4s ease-in-out infinite;
+      }
+
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.35;
+        }
+        50% {
+          opacity: 0.62;
+        }
+      }
+
+      .wrap {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 28px 16px 52px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stage {
+        width: min(1160px, 96vw);
+        display: grid;
+        gap: 18px;
+      }
+
+      .title {
+        text-align: center;
+        margin-bottom: 6px;
+      }
+
+      .title h1 {
+        margin: 0 0 8px;
+        font-size: clamp(22px, 3.8vw, 42px);
+        letter-spacing: 0.4px;
+        font-weight: 900;
+      }
+
+      .title p {
+        margin: 0;
+        opacity: 0.86;
+        font-size: clamp(14px, 2vw, 16px);
+      }
+
+      .top {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 18px;
+        align-items: stretch;
+      }
+
+      @media (max-width: 1020px) {
+        .top {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .envelope-zone {
+        display: grid;
+        place-items: center;
+        padding: 6px;
+      }
+
+      .envelope {
+        width: min(560px, 95vw);
+        aspect-ratio: 16/10;
+        position: relative;
+        border-radius: 24px;
+        transform: translateY(0);
+        transition:
+          transform 0.35s ease,
+          filter 0.35s ease;
+        filter: drop-shadow(0 35px 60px rgba(0, 0, 0, 0.5));
+        user-select: none;
+        cursor: pointer;
+      }
+
+      .envelope:hover {
+        transform: translateY(-4px);
+        filter: drop-shadow(0 45px 80px rgba(0, 0, 0, 0.55));
+      }
+
+      .env-body {
+        position: absolute;
+        inset: 0;
+        border-radius: 24px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.09),
+          rgba(255, 255, 255, 0.03)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        overflow: hidden;
+        backdrop-filter: blur(12px);
+      }
+
+      .env-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 64%;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 77, 125, 0.22),
+          rgba(255, 77, 125, 0.09)
+        );
+        border-top: 1px solid rgba(255, 255, 255, 0.09);
+      }
+
+      .env-left,
+      .env-right,
+      .env-center {
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        opacity: 0.95;
+      }
+
+      .env-left {
+        left: 0;
+        border-width: 0 0 220px 280px;
+        border-color: transparent transparent rgba(255, 255, 255, 0.07)
+          transparent;
+      }
+
+      .env-right {
+        right: 0;
+        border-width: 0 280px 220px 0;
+        border-color: transparent rgba(255, 255, 255, 0.06) transparent
+          transparent;
+      }
+
+      .env-center {
+        left: 50%;
+        transform: translateX(-50%);
+        border-width: 0 280px 220px 280px;
+        border-color: transparent transparent rgba(255, 255, 255, 0.11)
+          transparent;
+        filter: blur(0.2px);
+      }
+
+      .flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 56%;
+        transform-origin: top;
+        transform: rotateX(0deg);
+        transition: transform 0.9s cubic-bezier(0.2, 0.9, 0.2, 1);
+        z-index: 6;
+      }
+
+      .flap::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        width: 0;
+        height: 0;
+        margin: auto;
+        border-style: solid;
+        border-width: 0 280px 210px 280px;
+        border-color: transparent transparent rgba(255, 255, 255, 0.12)
+          transparent;
+        filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.25));
+      }
+
+      .seal {
+        position: absolute;
+        left: 50%;
+        top: 56%;
+        transform: translate(-50%, -50%);
+        width: 68px;
+        height: 68px;
+        border-radius: 999px;
+        background:
+          radial-gradient(
+            circle at 30% 30%,
+            rgba(255, 255, 255, 0.38),
+            transparent 35%
+          ),
+          radial-gradient(
+            circle at 70% 80%,
+            rgba(0, 0, 0, 0.12),
+            transparent 55%
+          ),
+          linear-gradient(135deg, var(--rose), var(--rose2));
+        box-shadow:
+          0 20px 35px rgba(0, 0, 0, 0.38),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+        z-index: 7;
+        display: grid;
+        place-items: center;
+        transition:
+          transform 0.45s ease,
+          opacity 0.45s ease;
+      }
+
+      .seal span {
+        font-size: 30px;
+        filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+      }
+
+      .env-label {
+        position: absolute;
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        opacity: 0.95;
+        font-size: 14px;
+        letter-spacing: 0.2px;
+      }
+
+      .tag {
+        padding: 10px 12px;
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.26);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 140px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        background: var(--rose);
+        box-shadow: 0 0 0 7px rgba(255, 77, 125, 0.16);
+      }
+
+      .player {
+        width: 100%;
+        max-width: 420px;
+        border-radius: 28px;
+        overflow: hidden;
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        background: rgba(0, 0, 0, 0.26);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5);
+        align-self: stretch;
+        position: relative;
+      }
+
+      .player::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        background: radial-gradient(
+          600px 300px at 20% 10%,
+          rgba(255, 77, 125, 0.18),
+          transparent 60%
+        );
+        pointer-events: none;
+      }
+
+      .player-inner {
+        position: relative;
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+
+      .player-top {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+      }
+
+      .cover {
+        width: 82px;
+        height: 82px;
+        border-radius: 18px;
+        overflow: hidden;
+        flex: 0 0 auto;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        position: relative;
+      }
+
+      .cover img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        filter: contrast(1.05) saturate(1.05);
+      }
+
+      .now {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .song {
+        font-weight: 900;
+        font-size: 16px;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .artist {
+        margin: 4px 0 0;
+        opacity: 0.75;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .mini {
+        margin-top: 10px;
+        opacity: 0.78;
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      .bar {
+        width: 100%;
+        height: 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .bar-fill {
+        height: 100%;
+        width: 0%;
+        border-radius: 999px;
+        background: linear-gradient(135deg, var(--rose), var(--rose2));
+      }
+
+      .time {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        opacity: 0.72;
+        margin-top: 8px;
+      }
+
+      .player-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 2px;
+      }
+
+      .pbtn {
+        border: none;
+        cursor: pointer;
+        border-radius: 18px;
+        padding: 12px 14px;
+        font-weight: 900;
+        letter-spacing: 0.2px;
+        transition:
+          transform 0.12s ease,
+          opacity 0.2s ease,
+          background 0.2s ease;
+        color: white;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+      }
+
+      .pbtn:hover {
+        background: rgba(255, 255, 255, 0.14);
+      }
+
+      .pbtn:active {
+        transform: translateY(1px) scale(0.99);
+      }
+
+      .pbtn.primary {
+        background: linear-gradient(135deg, var(--rose), var(--rose2));
+        border: none;
+      }
+
+      .vol {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex: 1;
+        justify-content: flex-end;
+      }
+
+      .vol input {
+        width: 120px;
+        accent-color: var(--rose);
+      }
+
+      .letter {
+        width: min(980px, 96vw);
+        background:
+          radial-gradient(
+            900px 380px at 15% 5%,
+            rgba(255, 77, 125, 0.1),
+            transparent 60%
+          ),
+          radial-gradient(
+            900px 380px at 85% 10%,
+            rgba(255, 122, 162, 0.1),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #fffaf4, var(--paper));
+        color: var(--ink);
+        border-radius: 28px;
+        box-shadow: var(--shadow);
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+
+        transform: translateY(22px) scale(0.98);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .letter.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .letter-head {
+        padding: 22px 26px;
+        background:
+          radial-gradient(
+            700px 220px at 20% 10%,
+            rgba(255, 77, 125, 0.22),
+            transparent 55%
+          ),
+          radial-gradient(
+            700px 220px at 80% 10%,
+            rgba(255, 122, 162, 0.22),
+            transparent 55%
+          ),
+          linear-gradient(180deg, rgba(0, 0, 0, 0.03), transparent);
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.12);
+      }
+
+      .letter-head h2 {
+        margin: 0;
+        font-size: clamp(18px, 3vw, 26px);
+        font-weight: 900;
+        letter-spacing: 0.3px;
+      }
+
+      .letter-head small {
+        display: block;
+        margin-top: 6px;
+        opacity: 0.7;
+        font-size: 13px;
+      }
+
+      .letter-body {
+        padding: 28px;
+        font-size: 17px;
+        line-height: 1.8;
+      }
+
+      .letter-body p {
+        margin: 0 0 16px;
+      }
+
+      .signature {
+        margin-top: 18px;
+        padding-top: 18px;
+        border-top: 1px dashed rgba(0, 0, 0, 0.12);
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .signature .see {
+        font-weight: 900;
+        color: var(--rose);
+        font-size: 18px;
+        letter-spacing: 0.4px;
+      }
+
+      .controls {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 4px;
+      }
+
+      button {
+        border: none;
+        cursor: pointer;
+        padding: 12px 18px;
+        border-radius: 18px;
+        font-weight: 900;
+        letter-spacing: 0.2px;
+        transition:
+          transform 0.12s ease,
+          opacity 0.2s ease,
+          box-shadow 0.2s ease,
+          filter 0.2s ease;
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      }
+
+      button:hover {
+        filter: brightness(1.05);
+      }
+
+      button:active {
+        transform: translateY(1px) scale(0.99);
+      }
+
+      .btn-open {
+        background: linear-gradient(135deg, var(--rose), var(--rose2));
+        color: white;
+      }
+
+      .btn-close {
+        background: rgba(0, 0, 0, 0.75);
+        color: white;
+        box-shadow: none;
+      }
+
+      .hint {
+        opacity: 0.82;
+        font-size: 14px;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .envelope.open .flap {
+        transform: rotateX(170deg);
+      }
+
+      .envelope.open .seal {
+        transform: translate(-50%, -50%) scale(0.75);
+        opacity: 0.35;
+      }
+
+      .heart {
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        font-size: 18px;
+        pointer-events: none;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.7);
+        filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
+        animation: floatUp 1.8s ease forwards;
+        z-index: 9999;
+      }
+
+      @keyframes floatUp {
+        0% {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.7);
+        }
+        15% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(calc(-50% + var(--x)), calc(-50% - 170px))
+            scale(1.25);
+        }
+      }
+
+      @media (max-width: 520px) {
+        .letter-body {
+          font-size: 16px;
+          padding: 20px;
+        }
+        .letter-head {
+          padding: 18px 20px;
+        }
+        .tag {
+          min-width: auto;
+          padding: 9px 10px;
+          border-radius: 14px;
+        }
+        .env-label {
+          font-size: 13px;
+        }
+        .cover {
+          width: 74px;
+          height: 74px;
+        }
+        .player-inner {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="stars"></div>
+
+    <main class="wrap">
+      <div class="stage">
+        <div class="title">
+          <h1>Para ti mi negrita hermosa 💗</h1>
+          <p>Haz clic en el sobre para abrirlo 🐻</p>
+        </div>
+
+        <div class="top">
+          <div class="envelope-zone">
+            <section class="envelope" id="envelope" aria-label="Sobre de carta">
+              <div class="env-body">
+                <div class="flap"></div>
+                <div class="seal"><span>💗</span></div>
+
+                <div class="env-bottom"></div>
+                <div class="env-left"></div>
+                <div class="env-right"></div>
+                <div class="env-center"></div>
+
+                <div class="env-label">
+                  <div class="tag">
+                    <span class="dot"></span>
+                    <span>Para: Amira</span>
+                  </div>
+                  <div class="tag">
+                    <span class="dot"></span>
+                    <span>De: Jhair</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <aside class="player" aria-label="Reproductor de música">
+            <div class="player-inner">
+              <div class="player-top">
+                <div class="cover">
+                  <img src="nosotros.jpg" alt="Portada" />
+                </div>
+
+                <div class="now">
+                  <p class="song">Amor</p>
+                  <p class="artist">Emmanuel Cortess</p>
+                  <div class="mini" id="playerMsg">
+                    Presiona <b>Abrir carta</b> y empieza la música 🎶
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="bar" id="progressBar" title="Cambiar tiempo">
+                  <div class="bar-fill" id="progressFill"></div>
+                </div>
+
+                <div class="time">
+                  <span id="curTime">0:00</span>
+                  <span id="durTime">0:00</span>
+                </div>
+              </div>
+
+              <div class="player-controls">
+                <button class="pbtn primary" id="btnPlay">▶</button>
+                <button class="pbtn" id="btnPause">⏸</button>
+
+                <div class="vol">
+                  <span style="opacity: 0.8">🔊</span>
+                  <input
+                    id="volRange"
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.01"
+                    value="0.7"
+                  />
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="controls">
+          <button class="btn-open" id="btnOpen">Abrir carta ✉️</button>
+          <button class="btn-close" id="btnClose" style="display: none">
+            Cerrar carta
+          </button>
+        </div>
+
+        <div class="hint" id="hint">Tip: también puedes tocar el sello 💗</div>
+
+        <article class="letter" id="letter" aria-label="Carta de amor">
+          <header class="letter-head">
+            <h2>Amira, mi negrita hermosa…</h2>
+            <small>Un pedacito de mí, escrito para ti.</small>
+          </header>
+
+          <section class="letter-body" id="letterText">
+            <p>
+              Sé que últimamente hemos estado pasando por ciertas dificultades,
+              y más por el tema de la distancia. No podemos hablar como se debe,
+              como quisiéramos… y no sé si soy solo yo, pero siento que eso nos
+              está distanciando un poco. Y te juro que no me gusta sentirme así.
+            </p>
+
+            <p>No quiero perderte, ¿sabes?<br />Te amo demasiado.</p>
+
+            <p>
+              Amo tu intensidad, como tú le dices. Amo tus dramas, tu voz, tu
+              risa, tu manera de ser… amo todo eso que te hace tú. Y también amo
+              hasta esas cosas que a veces parecen “mucho”, porque para mí nunca
+              han sido demasiado… para mí siempre has sido lo que quiero, lo que
+              me gusta, lo que me hace sentir en casa.
+            </p>
+
+            <p>
+              Y tal vez me he estado descuidando en demostrarte bien cuánto te
+              amo. No porque no lo sienta, sino porque a veces me quedo corto, o
+              me confío, o no encuentro las palabras… pero la verdad es que te
+              amo con todo lo que soy.
+            </p>
+
+            <p>
+              Sé que te gustan los textos largos, por eso aquí estoy
+              escribiéndote uno. No por presión, ni porque me lo estés pidiendo,
+              sino porque quiero hacerlo… porque me nace… porque te amo.
+            </p>
+
+            <p>
+              Y porque yo todavía quiero ese futuro juntos del que siempre
+              hablamos: vivir juntos, casarnos, tener hijos… formar una vida.
+              Quizás algunos piensen que vamos demasiado rápido, pero solo
+              nosotros sabemos todo lo que hemos esperado. Solo nosotros sabemos
+              los años que tuvimos que aguantar, todo lo que nos guardamos, todo
+              lo que se sintió como “casi pero no”, todo lo que se quedó en
+              silencio.
+            </p>
+
+            <p>
+              Y sé que gran parte de eso fue por mí… por mi indecisión, por mi
+              falta de seguridad, por mis inseguridades tontas, por cosas como
+              mi altura, que ahora me doy cuenta que eran prejuicios ridículos
+              que me estaban frenando. Porque cuando hay amor de verdad, nada de
+              eso importa. Y tú me lo has demostrado desde siempre.
+            </p>
+
+            <p>
+              Hoy, con la discusión que tuvimos, como te mencioné en la llamada…
+              reconozco que estuve mal. Y también reconozco que me contradigo
+              cuando digo que quiero que seamos un equipo, una pareja sólida,
+              que se apoya… pero a la vez a veces actúo como si siguiera solo.
+            </p>
+
+            <p>
+              Y es que me he sentido solo tanto tiempo… cargando con todo yo
+              mismo, aguantando, acostumbrándome a no depender de nadie, a
+              resolverlo todo solo… que a veces se me olvida que ahora ya no
+              estoy así. Porque ahora te tengo a ti.
+            </p>
+
+            <p>
+              Y no a cualquiera… te tengo a ti: una mujer maravillosa. Y no es
+              algo de ahora, Amira… desde hace 8 años estoy enamorado de ti. Así
+              como tú de mí. Y ahora que por fin estamos juntos, yo quiero
+              hacerlo bien. De verdad.
+            </p>
+
+            <p>
+              Quisiera una última oportunidad para demostrártelo… para
+              demostrarte que puedo ser ese compañero que mereces. Ese
+              enamorado, ese cómplice, ese mejor amigo. No te lo digo por
+              presión, ni para que te sientas obligada a nada. Te lo digo porque
+              lo siento. Porque te amo desde siempre. Porque eres el amor de mi
+              vida… y siempre lo vas a ser.
+            </p>
+
+            <p>
+              Me encantaría despertar cada mañana a tu lado… y sentiría que soy
+              el hombre más afortunado del mundo. Ese día que dormimos juntos
+              por primera vez… yo sentí paz. Sentí felicidad. Sentí algo que no
+              había sentido en mucho tiempo. Aunque bueno… también un poquito de
+              miedo por lo que hicimos jajaja ya sabes.
+            </p>
+
+            <p>
+              Y yo sé que tengo que mejorar. Sé que tengo que aprender a
+              expresarme mejor para evitar ciertas cosas que te ponen mal,
+              aunque tú te hagas la fuerte. Te conozco… a mí no me puedes
+              engañar.
+            </p>
+
+            <p>
+              Yo sé que a veces me comporto como un idiota la mayor parte del
+              tiempo… pero te juro que trato de mejorar. No quiero seguir
+              repitiendo errores. No quiero lastimarte. No quiero que lo nuestro
+              se desgaste por cosas que sí se pueden cambiar.
+            </p>
+
+            <p>
+              Quiero hacer las cosas bien. Quiero fortalecer nuestra relación.
+              Porque para mí esto es algo muy serio. Tú eres la única mujer que
+              yo quiero tener y amar. Y sí, tal vez suene egoísta… pero mi amor
+              por ti es tan grande que no puedo evitarlo.
+            </p>
+
+            <p>Te amo. Te admiro. Me encanta todo de ti.</p>
+
+            <p>
+              En fin… espero que estés descansando bien, mi amor. Espero que
+              estés disfrutando tu viaje con tu familia, que comas rico, que te
+              distraigas, que te rías… y que aunque estemos lejos, sientas que
+              yo estoy contigo de alguna forma.
+            </p>
+
+            <p>
+              Te amo, mi negrita hermosa. Eres lo mejor que me ha pasado en la
+              vida. Y voy a seguir esforzándome por ser el novio que mereces. No
+              solo por ti… sino también por mí. Porque después de todo, crecer
+              juntos es parte del trabajo en equipo, ¿no? Apoyarnos, cuidarnos,
+              elegirnos incluso en los momentos difíciles.
+            </p>
+
+            <p>
+              Bueno… ahora sí me despido, para que duermas tranquila. No ronques
+              mucho noma xd 💗
+            </p>
+
+            <div class="signature">
+              <div class="see">Te veo… 💗</div>
+            </div>
+          </section>
+        </article>
+      </div>
+    </main>
+
+    <audio id="audio" preload="auto">
+      <source src="amor.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      const envelope = document.getElementById("envelope");
+      const btnOpen = document.getElementById("btnOpen");
+      const btnClose = document.getElementById("btnClose");
+      const letter = document.getElementById("letter");
+      const hint = document.getElementById("hint");
+
+      const audio = document.getElementById("audio");
+      const btnPlay = document.getElementById("btnPlay");
+      const btnPause = document.getElementById("btnPause");
+      const volRange = document.getElementById("volRange");
+      const progressBar = document.getElementById("progressBar");
+      const progressFill = document.getElementById("progressFill");
+      const curTime = document.getElementById("curTime");
+      const durTime = document.getElementById("durTime");
+      const playerMsg = document.getElementById("playerMsg");
+
+      let isOpen = false;
+
+      function spawnHeart(times = 6) {
+        const emojis = ["💗", "💖", "💘", "💕", "💞"];
+        for (let i = 0; i < times; i++) {
+          const heart = document.createElement("div");
+          heart.className = "heart";
+          heart.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+          const x = (Math.random() * 180 - 90).toFixed(0) + "px";
+          heart.style.setProperty("--x", x);
+
+          heart.style.left = 50 + (Math.random() * 20 - 10) + "%";
+          heart.style.top = 55 + (Math.random() * 10 - 5) + "%";
+          heart.style.fontSize = (16 + Math.random() * 18).toFixed(0) + "px";
+
+          document.body.appendChild(heart);
+          setTimeout(() => heart.remove(), 1900);
+        }
+      }
+
+      function formatTime(sec) {
+        if (!isFinite(sec)) return "0:00";
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${m}:${String(s).padStart(2, "0")}`;
+      }
+
+      function updateUI() {
+        curTime.textContent = formatTime(audio.currentTime);
+        durTime.textContent = formatTime(audio.duration);
+
+        const pct =
+          (audio.duration ? audio.currentTime / audio.duration : 0) * 100;
+        progressFill.style.width = pct + "%";
+
+        if (audio.paused) {
+          btnPlay.textContent = "▶";
+        } else {
+          btnPlay.textContent = "⏵";
+        }
+      }
+
+      async function safePlay() {
+        try {
+          await audio.play();
+          playerMsg.innerHTML = "Reproduciendo.....💗";
+        } catch (e) {
+          playerMsg.innerHTML = "Toca <b>Play</b> para que suene 🎶";
+        }
+        updateUI();
+      }
+
+      function openLetter() {
+        if (isOpen) return;
+        isOpen = true;
+
+        envelope.classList.add("open");
+        letter.classList.add("open");
+
+        btnOpen.style.display = "none";
+        btnClose.style.display = "inline-block";
+
+        hint.textContent =
+          "Listo… ahora léela con calma, y si sonríes, ya gané gg 😌💗";
+
+        spawnHeart(10);
+        safePlay();
+      }
+
+      function closeLetter() {
+        if (!isOpen) return;
+        isOpen = false;
+
+        envelope.classList.remove("open");
+        letter.classList.remove("open");
+
+        btnOpen.style.display = "inline-block";
+        btnClose.style.display = "none";
+
+        hint.textContent = "Tip: también puedes tocar el sello 💗";
+        spawnHeart(4);
+      }
+
+      btnOpen.addEventListener("click", openLetter);
+      btnClose.addEventListener("click", closeLetter);
+
+      envelope.addEventListener("click", () => {
+        if (!isOpen) openLetter();
+        else spawnHeart(5);
+      });
+
+      btnPlay.addEventListener("click", () => safePlay());
+      btnPause.addEventListener("click", () => {
+        audio.pause();
+        playerMsg.innerHTML = "Pausado… pero el amor sigue 😌💗";
+        updateUI();
+      });
+
+      volRange.addEventListener("input", () => {
+        audio.volume = Number(volRange.value);
+      });
+
+      progressBar.addEventListener("click", (e) => {
+        const rect = progressBar.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const pct = x / rect.width;
+        if (isFinite(audio.duration)) {
+          audio.currentTime = pct * audio.duration;
+        }
+        updateUI();
+      });
+
+      audio.addEventListener("loadedmetadata", updateUI);
+      audio.addEventListener("timeupdate", updateUI);
+      audio.addEventListener("play", updateUI);
+      audio.addEventListener("pause", updateUI);
+
+      audio.volume = Number(volRange.value);
+
+      window.addEventListener("load", () => {
+        setTimeout(() => spawnHeart(5), 600);
+        updateUI();
+      });
+    </script>
+  </body>
+</html>
